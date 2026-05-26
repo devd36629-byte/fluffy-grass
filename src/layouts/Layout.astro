@@ -28,11 +28,41 @@ const {
 
 <style is:global>
 	:root {
-		color-scheme: dark;
+		color-scheme: light;
+		--ess-lagoon: #C1EBE9;
+		--ess-sand: #FFF7C5;
+		--ess-sun: #F4AE52;
+		--ess-plum: #4F252E;
+		--ess-lagoon-rgb: 193, 235, 233;
+		--ess-sand-rgb: 255, 247, 197;
+		--ess-sun-rgb: 244, 174, 82;
+		--ess-plum-rgb: 79, 37, 46;
+
+		--color-background: var(--ess-lagoon);
+		--color-background-warm: var(--ess-sand);
+		--color-surface: rgba(var(--ess-sand-rgb), 0.78);
+		--color-surface-strong: var(--ess-sand);
+		--color-surface-cool: rgba(var(--ess-lagoon-rgb), 0.72);
+		--color-accent: var(--ess-sun);
+		--color-accent-soft: rgba(var(--ess-sun-rgb), 0.18);
+		--color-ink: var(--ess-plum);
+		--color-ink-muted: rgba(var(--ess-plum-rgb), 0.72);
+		--color-ink-soft: rgba(var(--ess-plum-rgb), 0.12);
+		--color-on-accent: var(--ess-plum);
+		--color-on-dark: var(--ess-sand);
+		--color-border: rgba(var(--ess-plum-rgb), 0.16);
+		--color-border-light: rgba(var(--ess-sand-rgb), 0.35);
+		--shadow-soft: 0 24px 80px rgba(var(--ess-plum-rgb), 0.16);
+		--shadow-warm: 0 30px 90px rgba(var(--ess-sun-rgb), 0.28);
+		--gradient-page: radial-gradient(circle at 12% 8%, rgba(var(--ess-sand-rgb), 0.95), transparent 24rem),
+			radial-gradient(circle at 86% 14%, rgba(var(--ess-sun-rgb), 0.5), transparent 27rem),
+			linear-gradient(135deg, var(--ess-lagoon) 0%, var(--ess-lagoon) 34%, var(--ess-sand) 68%, rgba(var(--ess-sun-rgb), 0.82) 100%);
+		--gradient-heat: linear-gradient(135deg, var(--ess-sand), var(--ess-sun) 68%, var(--ess-plum));
+
 		font-family:
 			Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-		background: #07111f;
-		color: #fff8df;
+		background: var(--color-background);
+		color: var(--color-ink);
 		font-synthesis: none;
 		text-rendering: optimizeLegibility;
 		-webkit-font-smoothing: antialiased;
@@ -46,15 +76,13 @@ const {
 		margin: 0;
 		min-width: 320px;
 		scroll-behavior: smooth;
+		background: var(--gradient-page);
 	}
 
 	body {
 		margin: 0;
 		min-height: 100vh;
-		background:
-			radial-gradient(circle at 18% 8%, rgba(255, 217, 88, 0.35), transparent 28rem),
-			radial-gradient(circle at 86% 18%, rgba(255, 103, 67, 0.28), transparent 24rem),
-			linear-gradient(140deg, #07111f 0%, #0b2636 42%, #10273b 62%, #f4aa43 62.2%, #f6d37a 100%);
+		background: var(--gradient-page);
 		overflow-x: hidden;
 	}
 
@@ -68,7 +96,7 @@ const {
 	}
 
 	::selection {
-		background: rgba(255, 219, 101, 0.45);
-		color: #09121f;
+		background: rgba(var(--ess-sun-rgb), 0.55);
+		color: var(--color-ink);
 	}
 </style>

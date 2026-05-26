@@ -65,7 +65,7 @@ const plans = [
 
 	.intro p {
 		margin: 0 0 12px;
-		color: #143043;
+		color: var(--color-ink-muted);
 		font-weight: 950;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
@@ -74,7 +74,7 @@ const plans = [
 
 	h2 {
 		margin: 0;
-		color: #132033;
+		color: var(--color-ink);
 		font-size: clamp(2rem, 4.6vw, 4.4rem);
 		line-height: 0.96;
 		letter-spacing: -0.075em;
@@ -92,17 +92,17 @@ const plans = [
 		display: flex;
 		flex-direction: column;
 		padding: 26px;
-		border: 1px solid rgba(19, 32, 51, 0.13);
+		border: 1px solid var(--color-border);
 		border-radius: 34px;
-		background: rgba(255, 248, 223, 0.78);
-		color: #132033;
-		box-shadow: 0 22px 64px rgba(99, 60, 16, 0.15);
+		background: rgba(var(--ess-sand-rgb), 0.82);
+		color: var(--color-ink);
+		box-shadow: var(--shadow-soft);
 	}
 
 	.plan.featured {
-		background: linear-gradient(180deg, #fff8df, #ffe69a 65%, #ffb054);
+		background: linear-gradient(180deg, var(--ess-sand), rgba(var(--ess-sun-rgb), 0.72) 72%, var(--ess-sun));
 		transform: translateY(-14px);
-		box-shadow: 0 34px 84px rgba(167, 82, 19, 0.28);
+		box-shadow: var(--shadow-warm);
 	}
 
 	.badge {
@@ -110,8 +110,8 @@ const plans = [
 		margin-bottom: 14px;
 		padding: 8px 12px;
 		border-radius: 999px;
-		background: #132033;
-		color: #fff8df;
+		background: var(--color-ink);
+		color: var(--color-on-dark);
 		font-size: 0.74rem;
 		font-weight: 950;
 		letter-spacing: 0.08em;
@@ -138,7 +138,7 @@ const plans = [
 	.price span {
 		display: block;
 		margin-top: 10px;
-		color: rgba(19, 32, 51, 0.68);
+		color: var(--color-ink-muted);
 		font-weight: 750;
 	}
 
@@ -154,13 +154,13 @@ const plans = [
 		display: flex;
 		gap: 10px;
 		line-height: 1.45;
-		color: rgba(19, 32, 51, 0.78);
+		color: var(--color-ink-muted);
 	}
 
 	li::before {
 		content: "✓";
 		font-weight: 950;
-		color: #ef6c2f;
+		color: var(--color-accent);
 	}
 
 	a {
@@ -170,8 +170,8 @@ const plans = [
 		min-height: 50px;
 		margin-top: auto;
 		border-radius: 999px;
-		background: #132033;
-		color: #fff8df;
+		background: var(--color-ink);
+		color: var(--color-on-dark);
 		font-weight: 900;
 		text-decoration: none;
 		transition: transform 180ms ease, background 180ms ease;
@@ -180,7 +180,8 @@ const plans = [
 	a:hover,
 	a:focus-visible {
 		transform: translateY(-2px);
-		background: #ef6c2f;
+		background: var(--color-accent);
+		color: var(--color-ink);
 		outline: none;
 	}
 

@@ -44,15 +44,16 @@ const quotes = [
 		max-width: 1180px;
 		margin: 0 auto;
 		padding: clamp(24px, 4vw, 42px);
-		border: 1px solid rgba(255, 255, 255, 0.16);
+		border: 1px solid rgba(var(--ess-sand-rgb), 0.34);
 		border-radius: 38px;
-		background: rgba(5, 19, 33, 0.72);
-		box-shadow: 0 28px 90px rgba(0, 0, 0, 0.22);
+		background: rgba(var(--ess-plum-rgb), 0.9);
+		color: var(--color-on-dark);
+		box-shadow: 0 28px 90px rgba(var(--ess-plum-rgb), 0.24);
 	}
 
 	.kicker {
 		margin: 0 0 12px;
-		color: #ffe58a;
+		color: var(--color-accent);
 		font-weight: 950;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
@@ -74,21 +75,21 @@ const quotes = [
 	figure {
 		margin: 0;
 		padding: 22px;
-		border: 1px solid rgba(255, 255, 255, 0.13);
+		border: 1px solid rgba(var(--ess-sand-rgb), 0.2);
 		border-radius: 26px;
-		background: rgba(255, 255, 255, 0.07);
+		background: rgba(var(--ess-sand-rgb), 0.08);
 	}
 
 	blockquote {
 		margin: 0;
-		color: rgba(255, 248, 223, 0.82);
+		color: rgba(var(--ess-sand-rgb), 0.86);
 		font-size: 1.06rem;
 		line-height: 1.58;
 	}
 
 	figcaption {
 		margin-top: 16px;
-		color: #ffe58a;
+		color: var(--color-accent);
 		font-weight: 900;
 	}
 

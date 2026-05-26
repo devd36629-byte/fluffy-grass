@@ -27,6 +27,8 @@ import FinalCta from '../components/FinalCta.astro';
 		position: relative;
 		isolation: isolate;
 		min-height: 100vh;
+		background: var(--gradient-page);
+		color: var(--color-ink);
 	}
 
 	.site-shell::before {
@@ -35,8 +37,8 @@ import FinalCta from '../components/FinalCta.astro';
 		inset: 0;
 		z-index: -2;
 		background-image:
-			linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-			linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+			linear-gradient(rgba(var(--ess-plum-rgb), 0.045) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(var(--ess-plum-rgb), 0.045) 1px, transparent 1px);
 		background-size: 72px 72px;
 		mask-image: linear-gradient(to bottom, black, transparent 78%);
 	}
