@@ -1,0 +1,202 @@
+---
+const plans = [
+	{
+		name: 'After Work Thaw',
+		price: '€79',
+		note: 'per emotionally fragile visit',
+		items: ['90 minutes of fake daylight', 'One towel pre-warmed by capitalism', 'Complimentary sigh of relief'],
+	},
+	{
+		name: 'Six-Month Denial',
+		price: '€399',
+		note: 'monthly, November through April',
+		items: ['Unlimited beach entry', 'Dedicated sad-coat locker', 'Priority spot under Sunlamp #7'],
+		featured: true,
+	},
+	{
+		name: 'Executive Vitamin D',
+		price: '€1,499',
+		note: 'for founders who miss blinking',
+		items: ['Private cabana with fake horizon', 'Personal weather gaslighter', 'Coconut water in a heated chalice'],
+	},
+];
+---
+
+<section class="pricing" id="pricing" aria-labelledby="pricing-title">
+	<div class="intro">
+		<p>Premium pricing for premium pretending</p>
+		<h2 id="pricing-title">Choose how aggressively you would like to ignore the weather.</h2>
+	</div>
+
+	<div class="cards">
+		{plans.map((plan) => (
+			<article class:list={["plan", { featured: plan.featured }]}>
+				{plan.featured && <div class="badge">Most Finnish</div>}
+				<h3>{plan.name}</h3>
+				<div class="price">
+					<strong>{plan.price}</strong>
+					<span>{plan.note}</span>
+				</div>
+				<ul>
+					{plan.items.map((item) => <li>{item}</li>)}
+				</ul>
+				<a href="#book">Reserve artificial joy</a>
+			</article>
+		))}
+	</div>
+</section>
+
+<style>
+	.pricing {
+		padding: 78px clamp(18px, 4vw, 64px);
+	}
+
+	.intro,
+	.cards {
+		max-width: 1180px;
+		margin-inline: auto;
+	}
+
+	.intro {
+		max-width: 830px;
+		margin-bottom: 34px;
+		text-align: center;
+	}
+
+	.intro p {
+		margin: 0 0 12px;
+		color: #143043;
+		font-weight: 950;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		font-size: 0.78rem;
+	}
+
+	h2 {
+		margin: 0;
+		color: #132033;
+		font-size: clamp(2rem, 4.6vw, 4.4rem);
+		line-height: 0.96;
+		letter-spacing: -0.075em;
+		text-wrap: balance;
+	}
+
+	.cards {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 18px;
+	}
+
+	.plan {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		padding: 26px;
+		border: 1px solid rgba(19, 32, 51, 0.13);
+		border-radius: 34px;
+		background: rgba(255, 248, 223, 0.78);
+		color: #132033;
+		box-shadow: 0 22px 64px rgba(99, 60, 16, 0.15);
+	}
+
+	.plan.featured {
+		background: linear-gradient(180deg, #fff8df, #ffe69a 65%, #ffb054);
+		transform: translateY(-14px);
+		box-shadow: 0 34px 84px rgba(167, 82, 19, 0.28);
+	}
+
+	.badge {
+		align-self: flex-start;
+		margin-bottom: 14px;
+		padding: 8px 12px;
+		border-radius: 999px;
+		background: #132033;
+		color: #fff8df;
+		font-size: 0.74rem;
+		font-weight: 950;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	h3 {
+		margin: 0;
+		font-size: 1.5rem;
+		letter-spacing: -0.05em;
+	}
+
+	.price {
+		margin: 26px 0 22px;
+	}
+
+	.price strong {
+		display: block;
+		font-size: clamp(3rem, 6vw, 4.4rem);
+		line-height: 0.9;
+		letter-spacing: -0.08em;
+	}
+
+	.price span {
+		display: block;
+		margin-top: 10px;
+		color: rgba(19, 32, 51, 0.68);
+		font-weight: 750;
+	}
+
+	ul {
+		display: grid;
+		gap: 12px;
+		margin: 0 0 28px;
+		padding: 0;
+		list-style: none;
+	}
+
+	li {
+		display: flex;
+		gap: 10px;
+		line-height: 1.45;
+		color: rgba(19, 32, 51, 0.78);
+	}
+
+	li::before {
+		content: "✓";
+		font-weight: 950;
+		color: #ef6c2f;
+	}
+
+	a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 50px;
+		margin-top: auto;
+		border-radius: 999px;
+		background: #132033;
+		color: #fff8df;
+		font-weight: 900;
+		text-decoration: none;
+		transition: transform 180ms ease, background 180ms ease;
+	}
+
+	a:hover,
+	a:focus-visible {
+		transform: translateY(-2px);
+		background: #ef6c2f;
+		outline: none;
+	}
+
+	@media (max-width: 920px) {
+		.cards {
+			grid-template-columns: 1fr;
+		}
+
+		.plan.featured {
+			transform: none;
+		}
+	}
+
+	@media (max-width: 620px) {
+		.pricing {
+			padding-inline: 14px;
+		}
+	}
+</style>

@@ -1,0 +1,111 @@
+<section class="final" id="book" aria-labelledby="final-title">
+	<div class="content">
+		<p>Doors open when the sun gives up</p>
+		<h2 id="final-title">Book your escape before Helsinki turns the contrast down again.</h2>
+		<a href="mailto:hello@endlesssummer.example?subject=I%20need%20fake%20sunlight%20immediately">
+			Apply for artificial summer
+		</a>
+	</div>
+</section>
+
+<style>
+	.final {
+		padding: 10px clamp(18px, 4vw, 64px) 64px;
+	}
+
+	.content {
+		position: relative;
+		max-width: 1180px;
+		margin: 0 auto;
+		padding: clamp(34px, 7vw, 84px);
+		border-radius: 42px;
+		background:
+			radial-gradient(circle at 14% 20%, rgba(255, 255, 255, 0.72), transparent 11rem),
+			linear-gradient(135deg, #fff477, #ff9b3d 55%, #ff604f);
+		color: #132033;
+		text-align: center;
+		box-shadow: 0 38px 110px rgba(255, 132, 55, 0.28);
+		overflow: hidden;
+	}
+
+	.content::before,
+	.content::after {
+		content: "";
+		position: absolute;
+		border-radius: 50%;
+		pointer-events: none;
+	}
+
+	.content::before {
+		right: -80px;
+		top: -90px;
+		width: 240px;
+		height: 240px;
+		border: 28px solid rgba(19, 32, 51, 0.08);
+	}
+
+	.content::after {
+		left: -60px;
+		bottom: -80px;
+		width: 220px;
+		height: 220px;
+		background: rgba(19, 32, 51, 0.08);
+	}
+
+	p {
+		position: relative;
+		margin: 0 0 14px;
+		font-weight: 950;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		font-size: 0.8rem;
+	}
+
+	h2 {
+		position: relative;
+		max-width: 850px;
+		margin: 0 auto;
+		font-size: clamp(2.2rem, 5.4vw, 5.4rem);
+		line-height: 0.92;
+		letter-spacing: -0.085em;
+		text-wrap: balance;
+	}
+
+	a {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 56px;
+		margin-top: 32px;
+		padding: 0 26px;
+		border-radius: 999px;
+		background: #132033;
+		color: #fff8df;
+		font-weight: 950;
+		text-decoration: none;
+		box-shadow: 0 20px 44px rgba(19, 32, 51, 0.25);
+		transition: transform 180ms ease, box-shadow 180ms ease;
+	}
+
+	a:hover,
+	a:focus-visible {
+		transform: translateY(-2px);
+		box-shadow: 0 26px 54px rgba(19, 32, 51, 0.32);
+		outline: none;
+	}
+
+	@media (max-width: 620px) {
+		.final {
+			padding-inline: 14px;
+		}
+
+		.content {
+			border-radius: 30px;
+		}
+
+		a {
+			width: 100%;
+		}
+	}
+</style>

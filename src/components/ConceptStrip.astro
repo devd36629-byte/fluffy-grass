@@ -1,0 +1,57 @@
+---
+const concepts = [
+	'January darkness enters through revolving door',
+	'Artificial solarium sun apologizes for nothing',
+	'Imported sand hides existential dread beautifully',
+	'You leave smelling like coconut and questionable decisions',
+];
+---
+
+<section class="strip" aria-label="How Endless Summer Simulator works">
+	<div class="track">
+		{concepts.concat(concepts).map((item) => (
+			<span>{item}</span>
+		))}
+	</div>
+</section>
+
+<style>
+	.strip {
+		margin: -36px 0 0;
+		padding: 0 clamp(14px, 4vw, 64px);
+		overflow: hidden;
+	}
+
+	.track {
+		display: flex;
+		gap: 12px;
+		max-width: 1180px;
+		margin: 0 auto;
+		padding: 12px;
+		border: 1px solid rgba(255, 255, 255, 0.16);
+		border-radius: 28px;
+		background: rgba(255, 248, 223, 0.1);
+		backdrop-filter: blur(16px);
+	}
+
+	span {
+		flex: 0 0 auto;
+		padding: 12px 16px;
+		border-radius: 999px;
+		background: rgba(4, 16, 30, 0.5);
+		color: rgba(255, 248, 223, 0.84);
+		font-weight: 800;
+		font-size: 0.92rem;
+	}
+
+	@media (max-width: 720px) {
+		.track {
+			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+		}
+
+		span {
+			scroll-snap-align: start;
+		}
+	}
+</style>

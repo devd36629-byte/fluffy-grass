@@ -1,11 +1,43 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import HeroSection from '../components/HeroSection.astro';
+import ConceptStrip from '../components/ConceptStrip.astro';
+import FeatureGrid from '../components/FeatureGrid.astro';
+import PricingCards from '../components/PricingCards.astro';
+import TestimonialSection from '../components/TestimonialSection.astro';
+import FinalCta from '../components/FinalCta.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+	title="Endless Summer Simulator | Helsinki's Premium Fake Beach"
+	description="A satirical landing page for indoor Helsinki beaches delivering 24-hour sunlight and tropical heat all winter."
+>
+	<main class="site-shell">
+		<HeroSection />
+		<ConceptStrip />
+		<FeatureGrid />
+		<PricingCards />
+		<TestimonialSection />
+		<FinalCta />
+	</main>
 </Layout>
+
+<style>
+	.site-shell {
+		position: relative;
+		isolation: isolate;
+		min-height: 100vh;
+	}
+
+	.site-shell::before {
+		content: "";
+		position: fixed;
+		inset: 0;
+		z-index: -2;
+		background-image:
+			linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+		background-size: 72px 72px;
+		mask-image: linear-gradient(to bottom, black, transparent 78%);
+	}
+</style>

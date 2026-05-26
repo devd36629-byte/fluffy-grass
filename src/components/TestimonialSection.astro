@@ -1,0 +1,106 @@
+---
+const quotes = [
+	{
+		quote: 'I forgot it was dark at 14:37. For twelve glorious minutes, I had a personality again.',
+		name: 'Aino, Töölö',
+	},
+	{
+		quote: 'The sand in my boot was annoying, but less annoying than February. Five stars.',
+		name: 'Mikko, Espoo commuter',
+	},
+	{
+		quote: 'My therapist said it was avoidance. I said it was a beach membership with analytics.',
+		name: 'Sari, product manager',
+	},
+];
+---
+
+<section class="testimonials" aria-labelledby="testimonial-title">
+	<div class="panel">
+		<div>
+			<p class="kicker">Early survivors report</p>
+			<h2 id="testimonial-title">The reviews are warm, slightly sweaty, and deeply concerned.</h2>
+		</div>
+		<div class="quote-grid">
+			{quotes.map((item) => (
+				<figure>
+					<blockquote>“{item.quote}”</blockquote>
+					<figcaption>{item.name}</figcaption>
+				</figure>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.testimonials {
+		padding: 26px clamp(18px, 4vw, 64px) 78px;
+	}
+
+	.panel {
+		display: grid;
+		grid-template-columns: 0.9fr 1.4fr;
+		gap: 28px;
+		max-width: 1180px;
+		margin: 0 auto;
+		padding: clamp(24px, 4vw, 42px);
+		border: 1px solid rgba(255, 255, 255, 0.16);
+		border-radius: 38px;
+		background: rgba(5, 19, 33, 0.72);
+		box-shadow: 0 28px 90px rgba(0, 0, 0, 0.22);
+	}
+
+	.kicker {
+		margin: 0 0 12px;
+		color: #ffe58a;
+		font-weight: 950;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		font-size: 0.78rem;
+	}
+
+	h2 {
+		margin: 0;
+		font-size: clamp(2rem, 4vw, 3.8rem);
+		line-height: 0.98;
+		letter-spacing: -0.07em;
+	}
+
+	.quote-grid {
+		display: grid;
+		gap: 14px;
+	}
+
+	figure {
+		margin: 0;
+		padding: 22px;
+		border: 1px solid rgba(255, 255, 255, 0.13);
+		border-radius: 26px;
+		background: rgba(255, 255, 255, 0.07);
+	}
+
+	blockquote {
+		margin: 0;
+		color: rgba(255, 248, 223, 0.82);
+		font-size: 1.06rem;
+		line-height: 1.58;
+	}
+
+	figcaption {
+		margin-top: 16px;
+		color: #ffe58a;
+		font-weight: 900;
+	}
+
+	@media (max-width: 900px) {
+		.panel {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 620px) {
+		.testimonials {
+			padding-inline: 14px;
+		}
+	}
+</style>
