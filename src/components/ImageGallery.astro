@@ -1,0 +1,215 @@
+---
+import { withBase } from '../lib/paths';
+
+const galleryItems = [
+	{
+		src: '/uploads/helsinki-winter-waterfront.jpg',
+		alt: 'Cold Helsinki waterfront before entering the simulator',
+		label: 'Before: civic grayscale',
+		tone: 'lagoon',
+	},
+	{
+		src: '/uploads/simulator-tanning-bed.jpg',
+		alt: 'Hybrid tanning bed used as visual reference for artificial sunlight',
+		label: 'The 24-hour sun engine',
+		tone: 'sun',
+	},
+	{
+		src: '/uploads/artificial-beach-lounger.jpg',
+		alt: 'Beach lounger scene representing the imported indoor beach',
+		label: 'Imported shoreline behavior',
+		tone: 'sand',
+	},
+	{
+		src: '/uploads/indoor-sun-escape.jpg',
+		alt: 'Sunny beach escape mood for the simulator interior',
+		label: 'After: suspiciously alive',
+		tone: 'sun',
+	},
+	{
+		src: '/uploads/summer-light-therapy.jpg',
+		alt: 'Warm light and summer atmosphere for winter light therapy',
+		label: 'Vitamin D theatre',
+		tone: 'sand',
+	},
+	{
+		src: '/uploads/premium-beach-membership.jpg',
+		alt: 'Premium beach environment for Endless Summer Simulator members',
+		label: 'Executive denial cabana',
+		tone: 'plum',
+	},
+];
+---
+
+<section class="gallery" aria-labelledby="gallery-title">
+	<div class="gallery-header">
+		<p>Evidence from the fake coastline</p>
+		<h2 id="gallery-title">A winter-proof mood board, now with operationally questionable lamps.</h2>
+	</div>
+
+	<div class="gallery-grid">
+		{galleryItems.map((item, index) => (
+			<figure class:list={["gallery-card", `tone-${item.tone}`, { wide: index === 0 || index === 3 }]}>
+				<img src={withBase(item.src)} alt={item.alt} loading="lazy" decoding="async" />
+				<figcaption>
+					<span>{String(index + 1).padStart(2, '0')}</span>
+					{item.label}
+				</figcaption>
+			</figure>
+		))}
+	</div>
+</section>
+
+<style>
+	.gallery {
+		padding: 46px clamp(18px, 4vw, 64px) 72px;
+	}
+
+	.gallery-header,
+	.gallery-grid {
+		max-width: 1180px;
+		margin-inline: auto;
+	}
+
+	.gallery-header {
+		display: grid;
+		grid-template-columns: 0.62fr 1.38fr;
+		gap: 28px;
+		align-items: end;
+		margin-bottom: 26px;
+	}
+
+	.gallery-header p {
+		margin: 0;
+		color: var(--color-ink-muted);
+		font-weight: 950;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		font-size: 0.78rem;
+	}
+
+	h2 {
+		margin: 0;
+		color: var(--color-ink);
+		font-size: clamp(2rem, 4.5vw, 4.25rem);
+		line-height: 0.96;
+		letter-spacing: -0.075em;
+		text-wrap: balance;
+	}
+
+	.gallery-grid {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		grid-auto-rows: 230px;
+		gap: 16px;
+	}
+
+	.gallery-card {
+		position: relative;
+		margin: 0;
+		border: 1px solid var(--color-border);
+		border-radius: 32px;
+		background: var(--color-surface);
+		box-shadow: var(--shadow-soft);
+		overflow: hidden;
+	}
+
+	.gallery-card.wide {
+		grid-column: span 2;
+		grid-row: span 2;
+	}
+
+	.gallery-card::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		background:
+			linear-gradient(180deg, transparent 35%, rgba(var(--ess-plum-rgb), 0.76)),
+			linear-gradient(135deg, var(--overlay, rgba(var(--ess-sun-rgb), 0.18)), transparent 58%);
+		pointer-events: none;
+	}
+
+	.gallery-card::after {
+		content: "";
+		position: absolute;
+		inset: 14px;
+		z-index: 2;
+		border: 1px solid rgba(var(--ess-sand-rgb), 0.32);
+		border-radius: 22px;
+		pointer-events: none;
+	}
+
+	.tone-lagoon { --overlay: rgba(var(--ess-lagoon-rgb), 0.42); }
+	.tone-sun { --overlay: rgba(var(--ess-sun-rgb), 0.34); }
+	.tone-sand { --overlay: rgba(var(--ess-sand-rgb), 0.44); }
+	.tone-plum { --overlay: rgba(var(--ess-plum-rgb), 0.24); }
+
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		filter: saturate(1.08) contrast(1.03);
+		transform: scale(1.01);
+	}
+
+	figcaption {
+		position: absolute;
+		left: 24px;
+		right: 24px;
+		bottom: 22px;
+		z-index: 3;
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		color: var(--color-on-dark);
+		font-weight: 950;
+		font-size: clamp(1rem, 1.6vw, 1.24rem);
+		line-height: 1.1;
+		letter-spacing: -0.03em;
+		text-shadow: 0 2px 16px rgba(var(--ess-plum-rgb), 0.5);
+	}
+
+	figcaption span {
+		display: grid;
+		place-items: center;
+		flex: 0 0 auto;
+		width: 42px;
+		height: 42px;
+		border: 1px solid rgba(var(--ess-sand-rgb), 0.48);
+		border-radius: 50%;
+		background: rgba(var(--ess-sand-rgb), 0.16);
+		color: var(--ess-sand);
+		font-size: 0.76rem;
+		letter-spacing: 0.08em;
+		backdrop-filter: blur(10px);
+	}
+
+	@media (max-width: 980px) {
+		.gallery-header {
+			grid-template-columns: 1fr;
+		}
+
+		.gallery-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			grid-auto-rows: 220px;
+		}
+	}
+
+	@media (max-width: 620px) {
+		.gallery {
+			padding-inline: 14px;
+		}
+
+		.gallery-grid {
+			grid-template-columns: 1fr;
+			grid-auto-rows: 260px;
+		}
+
+		.gallery-card.wide {
+			grid-column: auto;
+			grid-row: auto;
+		}
+	}
+</style>

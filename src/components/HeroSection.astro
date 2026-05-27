@@ -1,9 +1,17 @@
 ---
+import { withBase } from '../lib/paths';
+
 const stats = [
 	{ value: '24h', label: 'legally suspicious sunlight' },
 	{ value: '+31°C', label: 'guaranteed indoor denial' },
 	{ value: '6 mo', label: 'winter avoidance plan' },
 ];
+
+const heroImages = {
+	main: withBase('/uploads/indoor-sun-escape.jpg'),
+	winter: withBase('/uploads/helsinki-winter-waterfront.jpg'),
+	lamp: withBase('/uploads/simulator-tanning-bed.jpg'),
+};
 ---
 
 <section class="hero" aria-labelledby="hero-title">
@@ -42,24 +50,39 @@ const stats = [
 			</div>
 		</div>
 
-		<div class="beach-card" aria-label="Illustration of tropical beach inside snowy Helsinki">
+		<div class="beach-card" aria-label="Photo collage of Endless Summer Simulator scenes">
+			<img
+				class="hero-photo main-photo"
+				src={heroImages.main}
+				alt="Warm beach scene used as inspiration for the artificial indoor summer dome"
+				loading="eager"
+				decoding="async"
+			/>
 			<div class="snow-window">
 				<span>Helsinki outside</span>
 				<div class="snowflakes" aria-hidden="true">✦ ✧ ✦ ✧ ✦</div>
 			</div>
+			<img
+				class="hero-photo winter-photo"
+				src={heroImages.winter}
+				alt="Cold waterfront representing the Helsinki winter guests are escaping"
+				loading="eager"
+				decoding="async"
+			/>
+			<img
+				class="hero-photo lamp-photo"
+				src={heroImages.lamp}
+				alt="Tanning bed standing in for the simulator's industrial artificial sunlight"
+				loading="lazy"
+				decoding="async"
+			/>
 			<div class="sun" aria-hidden="true"></div>
 			<div class="lamp-ring" aria-hidden="true"></div>
-			<div class="palm" aria-hidden="true">
-				<div class="leaf leaf-one"></div>
-				<div class="leaf leaf-two"></div>
-				<div class="leaf leaf-three"></div>
-				<div class="trunk"></div>
-			</div>
 			<div class="heat-sign">Feels like: July, morally questionable</div>
 			<div class="water" aria-hidden="true"></div>
-			<div class="sand" aria-hidden="true">
-				<span class="chair"></span>
-				<span class="umbrella"></span>
+			<div class="sand" aria-hidden="true"></div>
+			<div class="caption-card">
+				<strong>Inside:</strong> imported summer, coconut optimism, and absolutely no February.
 			</div>
 		</div>
 	</div>
@@ -275,7 +298,7 @@ const stats = [
 		border: 1px solid rgba(var(--ess-sand-rgb), 0.64);
 		border-radius: 42px;
 		background:
-			linear-gradient(180deg, rgba(var(--ess-lagoon-rgb), 0.94), rgba(var(--ess-lagoon-rgb), 0.76) 44%, transparent 44%),
+			linear-gradient(180deg, rgba(var(--ess-lagoon-rgb), 0.68), transparent 42%),
 			linear-gradient(180deg, var(--ess-sand) 0%, var(--ess-sun) 100%);
 		box-shadow:
 			0 35px 120px rgba(var(--ess-plum-rgb), 0.22),
@@ -287,9 +310,62 @@ const stats = [
 		content: "";
 		position: absolute;
 		inset: 18px;
+		z-index: 5;
 		border: 1px solid rgba(var(--ess-sand-rgb), 0.72);
 		border-radius: 30px;
 		pointer-events: none;
+	}
+
+	.beach-card::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: 2;
+		background:
+			linear-gradient(180deg, rgba(var(--ess-plum-rgb), 0.12), transparent 30%, rgba(var(--ess-sun-rgb), 0.34)),
+			radial-gradient(circle at 76% 28%, rgba(var(--ess-sand-rgb), 0.88), transparent 13rem);
+		mix-blend-mode: multiply;
+		pointer-events: none;
+	}
+
+	.hero-photo {
+		position: absolute;
+		display: block;
+		object-fit: cover;
+		border: 1px solid rgba(var(--ess-sand-rgb), 0.52);
+		box-shadow: 0 22px 62px rgba(var(--ess-plum-rgb), 0.28);
+	}
+
+	.main-photo {
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+		filter: saturate(1.08) sepia(0.08);
+	}
+
+	.winter-photo,
+	.lamp-photo {
+		z-index: 4;
+		border-radius: 24px;
+	}
+
+	.winter-photo {
+		top: 84px;
+		left: 28px;
+		width: 42%;
+		height: 150px;
+		filter: saturate(0.78) contrast(1.06) hue-rotate(150deg);
+		transform: rotate(-4deg);
+	}
+
+	.lamp-photo {
+		right: 34px;
+		bottom: 96px;
+		width: 48%;
+		height: 180px;
+		filter: saturate(1.14) contrast(1.03);
+		transform: rotate(5deg);
 	}
 
 	.snow-window {
@@ -297,6 +373,7 @@ const stats = [
 		top: 26px;
 		left: 26px;
 		right: 26px;
+		z-index: 6;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -317,8 +394,9 @@ const stats = [
 
 	.sun {
 		position: absolute;
-		top: 112px;
+		top: 126px;
 		right: 58px;
+		z-index: 3;
 		width: 168px;
 		height: 168px;
 		border-radius: 50%;
@@ -328,8 +406,9 @@ const stats = [
 
 	.lamp-ring {
 		position: absolute;
-		top: 79px;
+		top: 93px;
 		right: 24px;
+		z-index: 3;
 		width: 238px;
 		height: 238px;
 		border: 16px dashed rgba(var(--ess-sand-rgb), 0.55);
@@ -338,13 +417,14 @@ const stats = [
 
 	.heat-sign {
 		position: absolute;
-		top: 292px;
+		top: 280px;
 		left: 34px;
+		z-index: 6;
 		max-width: 230px;
 		padding: 14px 16px;
 		border: 1px solid rgba(var(--ess-plum-rgb), 0.12);
 		border-radius: 18px;
-		background: rgba(var(--ess-sand-rgb), 0.9);
+		background: rgba(var(--ess-sand-rgb), 0.92);
 		color: var(--color-ink);
 		font-weight: 900;
 		line-height: 1.25;
@@ -357,11 +437,12 @@ const stats = [
 		left: -12%;
 		right: -12%;
 		bottom: 150px;
+		z-index: 3;
 		height: 175px;
 		background:
 			radial-gradient(ellipse at 20% 20%, rgba(var(--ess-sand-rgb), 0.72), transparent 24%),
 			repeating-linear-gradient(-5deg, rgba(var(--ess-sand-rgb), 0.38) 0 8px, transparent 8px 31px),
-			linear-gradient(135deg, var(--ess-lagoon), rgba(var(--ess-plum-rgb), 0.38));
+			linear-gradient(135deg, rgba(var(--ess-lagoon-rgb), 0.78), rgba(var(--ess-plum-rgb), 0.38));
 		border-radius: 50% 50% 0 0;
 		transform: rotate(-3deg);
 	}
@@ -371,80 +452,33 @@ const stats = [
 		left: 0;
 		right: 0;
 		bottom: 0;
+		z-index: 3;
 		height: 218px;
 		background:
 			radial-gradient(circle at 20% 48%, rgba(var(--ess-plum-rgb), 0.16) 0 3px, transparent 4px),
 			radial-gradient(circle at 72% 34%, rgba(var(--ess-plum-rgb), 0.13) 0 4px, transparent 5px),
-			linear-gradient(180deg, var(--ess-sand), var(--ess-sun));
+			linear-gradient(180deg, rgba(var(--ess-sand-rgb), 0.92), rgba(var(--ess-sun-rgb), 0.9));
 		clip-path: ellipse(92% 62% at 50% 72%);
 	}
 
-	.palm {
+	.caption-card {
 		position: absolute;
-		left: 54%;
-		bottom: 122px;
-		width: 170px;
-		height: 270px;
-		transform: rotate(6deg);
+		left: 34px;
+		right: 34px;
+		bottom: 34px;
+		z-index: 6;
+		padding: 16px 18px;
+		border: 1px solid rgba(var(--ess-sand-rgb), 0.5);
+		border-radius: 22px;
+		background: rgba(var(--ess-plum-rgb), 0.88);
+		color: var(--color-on-dark);
+		font-weight: 750;
+		line-height: 1.45;
+		backdrop-filter: blur(14px);
 	}
 
-	.trunk {
-		position: absolute;
-		bottom: 0;
-		left: 76px;
-		width: 26px;
-		height: 218px;
-		border-radius: 16px;
-		background: linear-gradient(90deg, var(--ess-plum), var(--ess-sun), var(--ess-plum));
-		transform: rotate(8deg);
-	}
-
-	.leaf {
-		position: absolute;
-		top: 26px;
-		left: 42px;
-		width: 126px;
-		height: 34px;
-		border-radius: 100% 0;
-		background: linear-gradient(90deg, var(--ess-plum), var(--ess-lagoon));
-		transform-origin: left center;
-	}
-
-	.leaf-one { transform: rotate(-34deg); }
-	.leaf-two { transform: rotate(18deg); }
-	.leaf-three { transform: rotate(62deg); }
-
-	.chair {
-		position: absolute;
-		left: 54px;
-		bottom: 42px;
-		width: 112px;
-		height: 14px;
-		border-radius: 999px;
-		background: var(--ess-plum);
-		box-shadow: 42px 22px 0 var(--ess-sand);
-		transform: rotate(-10deg);
-	}
-
-	.umbrella {
-		position: absolute;
-		right: 74px;
-		bottom: 74px;
-		width: 116px;
-		height: 58px;
-		border-radius: 116px 116px 0 0;
-		background: repeating-conic-gradient(from 0deg, var(--ess-plum) 0 32deg, var(--ess-sand) 32deg 64deg);
-		box-shadow: 0 10px 0 rgba(var(--ess-plum-rgb), 0.06);
-	}
-
-	.umbrella::after {
-		content: "";
-		position: absolute;
-		left: 55px;
-		top: 50px;
-		width: 8px;
-		height: 76px;
-		background: var(--ess-plum);
+	.caption-card strong {
+		color: var(--ess-sun);
 	}
 
 	@media (max-width: 900px) {
@@ -499,15 +533,22 @@ const stats = [
 			border-radius: 30px;
 		}
 
+		.winter-photo {
+			width: 48%;
+			height: 124px;
+		}
+
+		.lamp-photo {
+			right: 24px;
+			bottom: 104px;
+			width: 56%;
+			height: 142px;
+		}
+
 		.sun {
 			right: 32px;
 			width: 130px;
 			height: 130px;
-		}
-
-		.palm {
-			left: 45%;
-			transform: scale(0.82) rotate(6deg);
 		}
 	}
 </style>

@@ -1,24 +1,34 @@
 ---
+import { withBase } from '../lib/paths';
+
 const features = [
 	{
 		title: 'Circadian Confusion Dome',
 		description: 'A ceiling of industrial suns convinces your body that midnight is brunch and Tuesday is July.',
 		icon: '🌞',
+		image: '/uploads/simulator-tanning-bed.jpg',
+		alt: 'Bright tanning bed lights representing the simulator sun array',
 	},
 	{
 		title: 'Premium Heat Anxiety',
 		description: 'Our patented +31°C air makes wool socks feel like a personal attack within minutes.',
 		icon: '🔥',
+		image: '/uploads/summer-light-therapy.jpg',
+		alt: 'Golden summer light used for heat therapy mood',
 	},
 	{
 		title: 'Snowproof Coconut Bar',
 		description: 'Sip drinks with umbrellas while actual Helsinki becomes a grayscale documentary outside.',
 		icon: '🍹',
+		image: '/uploads/artificial-beach-lounger.jpg',
+		alt: 'Sunny beach lounging scene for the fake coastline experience',
 	},
 	{
 		title: 'Seasonal Affective Upsell',
 		description: 'For a small fee, staff will say “you look alive again” every time you enter the lagoon.',
 		icon: '🧾',
+		image: '/uploads/premium-beach-membership.jpg',
+		alt: 'Premium resort-like beach atmosphere for members',
 	},
 ];
 ---
@@ -32,7 +42,10 @@ const features = [
 	<div class="grid">
 		{features.map((feature) => (
 			<article class="feature-card">
-				<div class="icon" aria-hidden="true">{feature.icon}</div>
+				<div class="photo-wrap">
+					<img src={withBase(feature.image)} alt={feature.alt} loading="lazy" decoding="async" />
+					<div class="icon" aria-hidden="true">{feature.icon}</div>
+				</div>
 				<h3>{feature.title}</h3>
 				<p>{feature.description}</p>
 			</article>
@@ -85,8 +98,8 @@ const features = [
 
 	.feature-card {
 		position: relative;
-		min-height: 300px;
-		padding: 24px;
+		min-height: 370px;
+		padding: 14px 14px 24px;
 		border: 1px solid var(--color-border);
 		border-radius: 32px;
 		background:
@@ -104,18 +117,48 @@ const features = [
 		background: radial-gradient(ellipse, rgba(var(--ess-sun-rgb), 0.35), transparent 70%);
 	}
 
+	.photo-wrap {
+		position: relative;
+		height: 150px;
+		border-radius: 24px;
+		overflow: hidden;
+		box-shadow: inset 0 0 0 1px rgba(var(--ess-sand-rgb), 0.65);
+	}
+
+	.photo-wrap::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, transparent 32%, rgba(var(--ess-plum-rgb), 0.2)), rgba(var(--ess-sun-rgb), 0.12);
+		pointer-events: none;
+	}
+
+	img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		filter: saturate(1.08) contrast(1.02);
+	}
+
 	.icon {
+		position: absolute;
+		left: 14px;
+		bottom: 14px;
+		z-index: 2;
 		display: grid;
 		place-items: center;
 		width: 58px;
 		height: 58px;
+		border: 1px solid rgba(var(--ess-sand-rgb), 0.62);
 		border-radius: 20px;
-		background: rgba(var(--ess-sun-rgb), 0.24);
+		background: rgba(var(--ess-sand-rgb), 0.86);
 		font-size: 1.7rem;
+		box-shadow: 0 12px 34px rgba(var(--ess-plum-rgb), 0.2);
 	}
 
 	h3 {
-		margin: 54px 0 12px;
+		margin: 24px 10px 12px;
 		color: var(--color-ink);
 		font-size: 1.32rem;
 		line-height: 1.08;
@@ -123,7 +166,9 @@ const features = [
 	}
 
 	p:not(.kicker) {
-		margin: 0;
+		position: relative;
+		z-index: 1;
+		margin: 0 10px;
 		color: var(--color-ink-muted);
 		line-height: 1.62;
 	}
@@ -149,7 +194,7 @@ const features = [
 		}
 
 		.feature-card {
-			min-height: 250px;
+			min-height: 320px;
 		}
 	}
 </style>
