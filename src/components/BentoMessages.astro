@@ -1,0 +1,283 @@
+---
+const messages = [
+	{
+		text: '24h legally suspicious sunlight',
+		label: 'sunlight',
+		variant: 'metric large',
+	},
+	{
+		text: '+31°C guaranteed indoor denial',
+		label: 'climate',
+		variant: 'metric warm',
+	},
+	{
+		text: '6 mo winter avoidance plan',
+		label: 'duration',
+		variant: 'metric cool',
+	},
+	{
+		text: 'Feels like: July, morally questionable',
+		label: 'forecast',
+		variant: 'wide dark',
+	},
+	{
+		text: 'Inside: imported summer, coconut optimism, and absolutely no February.',
+		label: 'amenities',
+		variant: 'feature tall',
+	},
+	{
+		text: 'January darkness enters through revolving door',
+		label: 'entry policy',
+		variant: 'cool',
+	},
+	{
+		text: 'Artificial solarium sun apologizes for nothing',
+		label: 'ethics',
+		variant: 'warm',
+	},
+	{
+		text: 'Imported sand hides existential dread beautifully',
+		label: 'interior design',
+		variant: 'wide sand',
+	},
+];
+---
+
+<section class="bento-section" aria-labelledby="bento-title">
+	<div class="section-head">
+		<p class="kicker">Official simulator conditions</p>
+		<h2 id="bento-title">A winter escape matrix calibrated for tactical denial.</h2>
+	</div>
+
+	<div class="bento-grid">
+		{messages.map((item, index) => (
+			<article class:list={['bento-card', item.variant]}>
+				<span class="number">{String(index + 1).padStart(2, '0')}</span>
+				<p class="label">{item.label}</p>
+				<h3>{item.text}</h3>
+			</article>
+		))}
+	</div>
+</section>
+
+<style>
+	.bento-section {
+		position: relative;
+		z-index: 2;
+		margin-top: -58px;
+		padding: 0 clamp(18px, 4vw, 64px) 22px;
+	}
+
+	.section-head,
+	.bento-grid {
+		max-width: 1180px;
+		margin-inline: auto;
+	}
+
+	.section-head {
+		display: grid;
+		grid-template-columns: 0.72fr 1.28fr;
+		gap: 28px;
+		align-items: end;
+		margin-bottom: 18px;
+		padding: 0 10px;
+	}
+
+	.kicker {
+		margin: 0;
+		color: var(--color-accent);
+		font-weight: 900;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		font-size: 0.8rem;
+	}
+
+	h2 {
+		margin: 0;
+		color: var(--color-ink);
+		font-size: clamp(1.9rem, 4.2vw, 4.1rem);
+		line-height: 0.96;
+		letter-spacing: -0.07em;
+		text-wrap: balance;
+	}
+
+	.bento-grid {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		grid-auto-rows: minmax(178px, auto);
+		gap: 14px;
+	}
+
+	.bento-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		min-height: 178px;
+		padding: 22px;
+		border: 1px solid var(--color-border);
+		border-radius: 30px;
+		background:
+			radial-gradient(circle at 86% 12%, rgba(var(--ess-sun-rgb), 0.26), transparent 9rem),
+			rgba(var(--ess-sand-rgb), 0.72);
+		box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(var(--ess-sand-rgb), 0.74);
+		overflow: hidden;
+	}
+
+	.bento-card::before {
+		content: "";
+		position: absolute;
+		inset: auto -18% -32% -18%;
+		height: 128px;
+		background: radial-gradient(ellipse, rgba(var(--ess-sun-rgb), 0.34), transparent 68%);
+		pointer-events: none;
+	}
+
+	.bento-card::after {
+		content: "";
+		position: absolute;
+		top: 18px;
+		right: 18px;
+		width: 52px;
+		height: 52px;
+		border-radius: 50%;
+		background: rgba(var(--ess-sand-rgb), 0.42);
+		box-shadow: 0 0 42px rgba(var(--ess-sun-rgb), 0.42);
+		pointer-events: none;
+	}
+
+	.number,
+	.label,
+	h3 {
+		position: relative;
+		z-index: 1;
+	}
+
+	.number {
+		position: absolute;
+		top: 20px;
+		left: 22px;
+		color: rgba(var(--ess-plum-rgb), 0.42);
+		font-size: 0.82rem;
+		font-weight: 900;
+		letter-spacing: 0.08em;
+	}
+
+	.label {
+		margin: 0 0 12px;
+		color: var(--color-accent);
+		font-size: 0.72rem;
+		font-weight: 900;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	h3 {
+		margin: 0;
+		color: var(--color-ink);
+		font-size: clamp(1.32rem, 2vw, 2rem);
+		line-height: 1.02;
+		letter-spacing: -0.055em;
+		text-wrap: balance;
+	}
+
+	.large {
+		grid-column: span 2;
+		grid-row: span 2;
+		min-height: 370px;
+		background:
+			radial-gradient(circle at 76% 18%, rgba(var(--ess-sand-rgb), 0.96), transparent 10rem),
+			linear-gradient(135deg, rgba(var(--ess-sun-rgb), 0.94), rgba(var(--ess-sand-rgb), 0.82) 62%, rgba(var(--ess-lagoon-rgb), 0.72));
+	}
+
+	.large h3 {
+		font-size: clamp(2.2rem, 5vw, 4.7rem);
+		line-height: 0.9;
+	}
+
+	.metric:not(.large) h3 {
+		font-size: clamp(1.6rem, 3vw, 2.8rem);
+	}
+
+	.wide {
+		grid-column: span 2;
+	}
+
+	.tall {
+		grid-row: span 2;
+		min-height: 370px;
+	}
+
+	.dark {
+		background:
+			radial-gradient(circle at 82% 12%, rgba(var(--ess-sun-rgb), 0.34), transparent 10rem),
+			linear-gradient(135deg, rgba(var(--ess-plum-rgb), 0.96), rgba(var(--ess-plum-rgb), 0.82));
+	}
+
+	.dark .number,
+	.dark .label,
+	.dark h3 {
+		color: var(--color-on-dark);
+	}
+
+	.dark .number {
+		opacity: 0.55;
+	}
+
+	.warm {
+		background:
+			radial-gradient(circle at 88% 18%, rgba(var(--ess-sand-rgb), 0.86), transparent 8rem),
+			linear-gradient(135deg, rgba(var(--ess-sun-rgb), 0.9), rgba(var(--ess-sand-rgb), 0.64));
+	}
+
+	.cool {
+		background:
+			radial-gradient(circle at 82% 14%, rgba(var(--ess-sand-rgb), 0.58), transparent 8rem),
+			linear-gradient(135deg, rgba(var(--ess-lagoon-rgb), 0.92), rgba(var(--ess-sand-rgb), 0.64));
+	}
+
+	.sand {
+		background:
+			radial-gradient(circle at 86% 16%, rgba(var(--ess-sun-rgb), 0.32), transparent 10rem),
+			linear-gradient(135deg, rgba(var(--ess-sand-rgb), 0.92), rgba(var(--ess-lagoon-rgb), 0.58));
+	}
+
+	.feature h3 {
+		font-size: clamp(1.58rem, 3vw, 3.15rem);
+	}
+
+	@media (max-width: 960px) {
+		.section-head {
+			grid-template-columns: 1fr;
+		}
+
+		.bento-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 620px) {
+		.bento-section {
+			margin-top: -46px;
+			padding-inline: 14px;
+		}
+
+		.bento-grid {
+			grid-template-columns: 1fr;
+			grid-auto-rows: auto;
+		}
+
+		.bento-card,
+		.large,
+		.tall,
+		.wide {
+			grid-column: auto;
+			grid-row: auto;
+			min-height: 184px;
+		}
+
+		.large h3 {
+			font-size: clamp(2rem, 12vw, 3.5rem);
+		}
+	}
+</style>

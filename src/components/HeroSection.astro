@@ -1,20 +1,10 @@
 ---
 import { withBase } from '../lib/paths';
 
-const stats = [
-	{ value: '24h', label: 'legally suspicious sunlight' },
-	{ value: '+31°C', label: 'guaranteed indoor denial' },
-	{ value: '6 mo', label: 'winter avoidance plan' },
-];
-
-const heroImages = {
-	main: withBase('/uploads/indoor-sun-escape.jpg'),
-	winter: withBase('/uploads/helsinki-winter-waterfront.jpg'),
-	lamp: withBase('/uploads/simulator-tanning-bed.jpg'),
-};
+const heroBackground = withBase('/uploads/indoor-sun-escape.jpg');
 ---
 
-<section class="hero" aria-labelledby="hero-title">
+<section class="hero" style={`--hero-bg-image: url("${heroBackground}");`} aria-labelledby="hero-title">
 	<nav class="nav" aria-label="Primary navigation">
 		<a class="brand" href="#hero-title" aria-label="Endless Summer Simulator home">
 			<span class="brand-mark" aria-hidden="true">☀</span>
@@ -40,57 +30,34 @@ const heroImages = {
 				<a class="button primary" href="#pricing">Choose your denial plan</a>
 				<a class="button secondary" href="#features">Tour the fake coast</a>
 			</div>
-			<div class="stats" aria-label="Endless Summer Simulator facts">
-				{stats.map((stat) => (
-					<div class="stat">
-						<strong>{stat.value}</strong>
-						<span>{stat.label}</span>
-					</div>
-				))}
-			</div>
-		</div>
-
-		<div class="beach-card" aria-label="Photo collage of Endless Summer Simulator scenes">
-			<img
-				class="hero-photo main-photo"
-				src={heroImages.main}
-				alt="Warm beach scene used as inspiration for the artificial indoor summer dome"
-				loading="eager"
-				decoding="async"
-			/>
-			<div class="snow-window">
-				<span>Helsinki outside</span>
-				<div class="snowflakes" aria-hidden="true">✦ ✧ ✦ ✧ ✦</div>
-			</div>
-			<img
-				class="hero-photo winter-photo"
-				src={heroImages.winter}
-				alt="Cold waterfront representing the Helsinki winter guests are escaping"
-				loading="eager"
-				decoding="async"
-			/>
-			<img
-				class="hero-photo lamp-photo"
-				src={heroImages.lamp}
-				alt="Tanning bed standing in for the simulator's industrial artificial sunlight"
-				loading="lazy"
-				decoding="async"
-			/>
-			<div class="sun" aria-hidden="true"></div>
-			<div class="lamp-ring" aria-hidden="true"></div>
-			<div class="heat-sign">Feels like: July, morally questionable</div>
-			<div class="water" aria-hidden="true"></div>
-			<div class="sand" aria-hidden="true"></div>
-			<div class="caption-card">
-				<strong>Inside:</strong> imported summer, coconut optimism, and absolutely no February.
-			</div>
 		</div>
 	</div>
 </section>
 
 <style>
 	.hero {
-		padding: 24px clamp(18px, 4vw, 64px) 88px;
+		position: relative;
+		isolation: isolate;
+		overflow: hidden;
+		min-height: 860px;
+		padding: 24px clamp(18px, 4vw, 64px) 132px;
+		background:
+			linear-gradient(90deg, rgba(var(--ess-sand-rgb), 0.96) 0%, rgba(var(--ess-sand-rgb), 0.86) 36%, rgba(var(--ess-lagoon-rgb), 0.46) 68%, rgba(var(--ess-plum-rgb), 0.12) 100%),
+			linear-gradient(180deg, rgba(var(--ess-lagoon-rgb), 0.52) 0%, rgba(var(--ess-sun-rgb), 0.08) 54%, rgba(var(--ess-lagoon-rgb), 0.92) 100%),
+			var(--hero-bg-image) center / cover no-repeat;
+		box-shadow: inset 0 -92px 110px rgba(var(--ess-lagoon-rgb), 0.9);
+	}
+
+	.hero::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background:
+			radial-gradient(circle at 12% 20%, rgba(var(--ess-sand-rgb), 0.74), transparent 24rem),
+			radial-gradient(circle at 76% 18%, rgba(var(--ess-sun-rgb), 0.28), transparent 24rem),
+			linear-gradient(180deg, transparent 68%, var(--ess-lagoon) 100%);
+		pointer-events: none;
 	}
 
 	.nav {
@@ -99,7 +66,7 @@ const heroImages = {
 		justify-content: space-between;
 		gap: 24px;
 		max-width: 1180px;
-		margin: 0 auto 68px;
+		margin: 0 auto 112px;
 		padding: 12px;
 		border: 1px solid var(--color-border);
 		border-radius: 999px;
@@ -160,13 +127,20 @@ const heroImages = {
 		color: var(--color-on-dark);
 	}
 
+	.nav,
+	.hero-grid {
+		position: relative;
+		z-index: 1;
+	}
+
 	.hero-grid {
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) minmax(330px, 520px);
-		align-items: center;
-		gap: clamp(34px, 6vw, 82px);
 		max-width: 1180px;
 		margin: 0 auto;
+	}
+
+	.hero-copy {
+		max-width: 840px;
 	}
 
 	.eyebrow {
@@ -183,6 +157,7 @@ const heroImages = {
 		letter-spacing: 0.02em;
 		text-transform: uppercase;
 		font-size: 0.78rem;
+		backdrop-filter: blur(10px);
 	}
 
 	.eyebrow::before {
@@ -195,17 +170,17 @@ const heroImages = {
 	}
 
 	h1 {
-		max-width: 760px;
+		max-width: 840px;
 		margin: 0;
 		color: var(--color-ink);
-		font-size: clamp(3.2rem, 8.4vw, 7.4rem);
+		font-size: clamp(3.2rem, 8.4vw, 7.6rem);
 		line-height: 0.88;
 		letter-spacing: -0.085em;
 		text-wrap: balance;
 	}
 
 	.lede {
-		max-width: 660px;
+		max-width: 680px;
 		margin: 26px 0 0;
 		color: var(--color-ink-muted);
 		font-size: clamp(1.06rem, 1.8vw, 1.25rem);
@@ -256,259 +231,37 @@ const heroImages = {
 		border: 1px solid var(--color-border);
 		background: rgba(var(--ess-sand-rgb), 0.58);
 		color: var(--color-ink);
-	}
-
-	.stats {
-		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 12px;
-		max-width: 650px;
-		margin-top: 44px;
-	}
-
-	.stat {
-		padding: 18px;
-		border: 1px solid var(--color-border);
-		border-radius: 24px;
-		background: rgba(var(--ess-sand-rgb), 0.58);
-		box-shadow: inset 0 1px 0 rgba(var(--ess-sand-rgb), 0.82);
-	}
-
-	.stat strong,
-	.stat span {
-		display: block;
-	}
-
-	.stat strong {
-		color: var(--color-ink);
-		font-size: clamp(1.7rem, 3vw, 2.4rem);
-		letter-spacing: -0.06em;
-	}
-
-	.stat span {
-		margin-top: 5px;
-		color: var(--color-ink-muted);
-		font-size: 0.9rem;
-		line-height: 1.35;
-	}
-
-	.beach-card {
-		position: relative;
-		min-height: 630px;
-		border: 1px solid rgba(var(--ess-sand-rgb), 0.64);
-		border-radius: 42px;
-		background:
-			linear-gradient(180deg, rgba(var(--ess-lagoon-rgb), 0.68), transparent 42%),
-			linear-gradient(180deg, var(--ess-sand) 0%, var(--ess-sun) 100%);
-		box-shadow:
-			0 35px 120px rgba(var(--ess-plum-rgb), 0.22),
-			0 0 120px rgba(var(--ess-sun-rgb), 0.26);
-		overflow: hidden;
-	}
-
-	.beach-card::before {
-		content: "";
-		position: absolute;
-		inset: 18px;
-		z-index: 5;
-		border: 1px solid rgba(var(--ess-sand-rgb), 0.72);
-		border-radius: 30px;
-		pointer-events: none;
-	}
-
-	.beach-card::after {
-		content: "";
-		position: absolute;
-		inset: 0;
-		z-index: 2;
-		background:
-			linear-gradient(180deg, rgba(var(--ess-plum-rgb), 0.12), transparent 30%, rgba(var(--ess-sun-rgb), 0.34)),
-			radial-gradient(circle at 76% 28%, rgba(var(--ess-sand-rgb), 0.88), transparent 13rem);
-		mix-blend-mode: multiply;
-		pointer-events: none;
-	}
-
-	.hero-photo {
-		position: absolute;
-		display: block;
-		object-fit: cover;
-		border: 1px solid rgba(var(--ess-sand-rgb), 0.52);
-		box-shadow: 0 22px 62px rgba(var(--ess-plum-rgb), 0.28);
-	}
-
-	.main-photo {
-		inset: 0;
-		width: 100%;
-		height: 100%;
-		border: 0;
-		filter: saturate(1.08) sepia(0.08);
-	}
-
-	.winter-photo,
-	.lamp-photo {
-		z-index: 4;
-		border-radius: 24px;
-	}
-
-	.winter-photo {
-		top: 84px;
-		left: 28px;
-		width: 42%;
-		height: 150px;
-		filter: saturate(0.78) contrast(1.06) hue-rotate(150deg);
-		transform: rotate(-4deg);
-	}
-
-	.lamp-photo {
-		right: 34px;
-		bottom: 96px;
-		width: 48%;
-		height: 180px;
-		filter: saturate(1.14) contrast(1.03);
-		transform: rotate(5deg);
-	}
-
-	.snow-window {
-		position: absolute;
-		top: 26px;
-		left: 26px;
-		right: 26px;
-		z-index: 6;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 14px 18px;
-		border: 1px solid rgba(var(--ess-lagoon-rgb), 0.58);
-		border-radius: 22px;
-		background: rgba(var(--ess-plum-rgb), 0.86);
-		color: var(--color-on-dark);
-		font-weight: 800;
 		backdrop-filter: blur(10px);
 	}
 
-	.snowflakes {
-		color: var(--ess-lagoon);
-		letter-spacing: 0.28em;
-		opacity: 0.92;
-	}
-
-	.sun {
-		position: absolute;
-		top: 126px;
-		right: 58px;
-		z-index: 3;
-		width: 168px;
-		height: 168px;
-		border-radius: 50%;
-		background: radial-gradient(circle, var(--ess-sand) 0 24%, var(--ess-sun) 25% 100%);
-		box-shadow: 0 0 65px 28px rgba(var(--ess-sun-rgb), 0.52);
-	}
-
-	.lamp-ring {
-		position: absolute;
-		top: 93px;
-		right: 24px;
-		z-index: 3;
-		width: 238px;
-		height: 238px;
-		border: 16px dashed rgba(var(--ess-sand-rgb), 0.55);
-		border-radius: 50%;
-	}
-
-	.heat-sign {
-		position: absolute;
-		top: 280px;
-		left: 34px;
-		z-index: 6;
-		max-width: 230px;
-		padding: 14px 16px;
-		border: 1px solid rgba(var(--ess-plum-rgb), 0.12);
-		border-radius: 18px;
-		background: rgba(var(--ess-sand-rgb), 0.92);
-		color: var(--color-ink);
-		font-weight: 900;
-		line-height: 1.25;
-		transform: rotate(-4deg);
-		box-shadow: 0 18px 38px rgba(var(--ess-plum-rgb), 0.15);
-	}
-
-	.water {
-		position: absolute;
-		left: -12%;
-		right: -12%;
-		bottom: 150px;
-		z-index: 3;
-		height: 175px;
-		background:
-			radial-gradient(ellipse at 20% 20%, rgba(var(--ess-sand-rgb), 0.72), transparent 24%),
-			repeating-linear-gradient(-5deg, rgba(var(--ess-sand-rgb), 0.38) 0 8px, transparent 8px 31px),
-			linear-gradient(135deg, rgba(var(--ess-lagoon-rgb), 0.78), rgba(var(--ess-plum-rgb), 0.38));
-		border-radius: 50% 50% 0 0;
-		transform: rotate(-3deg);
-	}
-
-	.sand {
-		position: absolute;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		z-index: 3;
-		height: 218px;
-		background:
-			radial-gradient(circle at 20% 48%, rgba(var(--ess-plum-rgb), 0.16) 0 3px, transparent 4px),
-			radial-gradient(circle at 72% 34%, rgba(var(--ess-plum-rgb), 0.13) 0 4px, transparent 5px),
-			linear-gradient(180deg, rgba(var(--ess-sand-rgb), 0.92), rgba(var(--ess-sun-rgb), 0.9));
-		clip-path: ellipse(92% 62% at 50% 72%);
-	}
-
-	.caption-card {
-		position: absolute;
-		left: 34px;
-		right: 34px;
-		bottom: 34px;
-		z-index: 6;
-		padding: 16px 18px;
-		border: 1px solid rgba(var(--ess-sand-rgb), 0.5);
-		border-radius: 22px;
-		background: rgba(var(--ess-plum-rgb), 0.88);
-		color: var(--color-on-dark);
-		font-weight: 750;
-		line-height: 1.45;
-		backdrop-filter: blur(14px);
-	}
-
-	.caption-card strong {
-		color: var(--ess-sun);
-	}
-
 	@media (max-width: 900px) {
+		.hero {
+			min-height: 760px;
+		}
+
 		.nav {
 			align-items: flex-start;
 			border-radius: 28px;
+			margin-bottom: 86px;
 		}
 
 		.nav-links {
 			flex-wrap: wrap;
 			justify-content: flex-end;
 		}
-
-		.hero-grid {
-			grid-template-columns: 1fr;
-		}
-
-		.beach-card {
-			min-height: 560px;
-		}
 	}
 
 	@media (max-width: 620px) {
 		.hero {
+			min-height: 720px;
 			padding-inline: 14px;
 			padding-top: 14px;
+			padding-bottom: 104px;
+			background-position: center top;
 		}
 
 		.nav {
-			margin-bottom: 44px;
+			margin-bottom: 64px;
 		}
 
 		.brand span:last-child {
@@ -520,35 +273,8 @@ const heroImages = {
 			display: none;
 		}
 
-		.stats {
-			grid-template-columns: 1fr;
-		}
-
 		.hero-actions .button {
 			width: 100%;
-		}
-
-		.beach-card {
-			min-height: 500px;
-			border-radius: 30px;
-		}
-
-		.winter-photo {
-			width: 48%;
-			height: 124px;
-		}
-
-		.lamp-photo {
-			right: 24px;
-			bottom: 104px;
-			width: 56%;
-			height: 142px;
-		}
-
-		.sun {
-			right: 32px;
-			width: 130px;
-			height: 130px;
 		}
 	}
 </style>
