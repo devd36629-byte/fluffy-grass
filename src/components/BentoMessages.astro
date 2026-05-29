@@ -1,9 +1,12 @@
 ---
+import { withBase } from '../lib/paths';
+
 const messages = [
 	{
 		text: '24h legally suspicious sunlight',
 		label: 'sunlight',
-		variant: 'metric large',
+		variant: 'metric large image-card couple-card',
+		image: '/uploads/artificial-beach-lounger.jpg',
 	},
 	{
 		text: '+31°C guaranteed indoor denial',
@@ -18,7 +21,8 @@ const messages = [
 	{
 		text: 'Feels like: July, morally questionable',
 		label: 'forecast',
-		variant: 'wide dark',
+		variant: 'wide image-card forecast-card',
+		image: '/uploads/helsinki-winter-waterfront.jpg',
 	},
 	{
 		text: 'Inside: imported summer, coconut optimism, and absolutely no February.',
@@ -51,7 +55,10 @@ const messages = [
 
 	<div class="bento-grid">
 		{messages.map((item, index) => (
-			<article class:list={['bento-card', item.variant]}>
+			<article
+				class:list={['bento-card', item.variant]}
+				style={item.image ? `--card-bg-image: url("${withBase(item.image)}");` : undefined}
+			>
 				<span class="number">{String(index + 1).padStart(2, '0')}</span>
 				<p class="label">{item.label}</p>
 				<h3>{item.text}</h3>
@@ -146,6 +153,47 @@ const messages = [
 		pointer-events: none;
 	}
 
+	.image-card {
+		border-color: rgba(var(--ess-sand-rgb), 0.42);
+		background:
+			linear-gradient(180deg, rgba(var(--ess-plum-rgb), 0.08) 0%, rgba(var(--ess-plum-rgb), 0.32) 46%, rgba(var(--ess-plum-rgb), 0.82) 100%),
+			linear-gradient(135deg, rgba(var(--ess-sun-rgb), 0.26), rgba(var(--ess-lagoon-rgb), 0.12)),
+			var(--card-bg-image) center / cover no-repeat;
+		box-shadow: var(--shadow-warm), inset 0 1px 0 rgba(var(--ess-sand-rgb), 0.48);
+	}
+
+	.image-card::before {
+		inset: 0;
+		height: auto;
+		background:
+			radial-gradient(circle at 74% 16%, rgba(var(--ess-sand-rgb), 0.76), transparent 9rem),
+			linear-gradient(180deg, transparent 38%, rgba(var(--ess-plum-rgb), 0.28));
+	}
+
+	.image-card::after {
+		top: 20px;
+		right: 20px;
+		background: rgba(var(--ess-sand-rgb), 0.72);
+		box-shadow: 0 0 58px rgba(var(--ess-sun-rgb), 0.75);
+	}
+
+	.couple-card {
+		background-position: center 42%;
+	}
+
+	.forecast-card {
+		background:
+			linear-gradient(90deg, rgba(var(--ess-plum-rgb), 0.9) 0%, rgba(var(--ess-plum-rgb), 0.68) 44%, rgba(var(--ess-plum-rgb), 0.18) 100%),
+			linear-gradient(135deg, rgba(var(--ess-lagoon-rgb), 0.36), rgba(var(--ess-sand-rgb), 0.18)),
+			var(--card-bg-image) center 54% / cover no-repeat;
+	}
+
+	.forecast-card::before {
+		background:
+			linear-gradient(90deg, rgba(var(--ess-plum-rgb), 0.26), transparent 64%),
+			radial-gradient(circle at 88% 18%, rgba(var(--ess-sand-rgb), 0.48), transparent 9rem);
+	}
+
 	.number,
 	.label,
 	h3 {
@@ -181,6 +229,21 @@ const messages = [
 		text-wrap: balance;
 	}
 
+	.image-card .number,
+	.image-card .label,
+	.image-card h3 {
+		color: var(--color-on-dark);
+		text-shadow: 0 3px 22px rgba(var(--ess-plum-rgb), 0.72);
+	}
+
+	.image-card .number {
+		opacity: 0.72;
+	}
+
+	.image-card .label {
+		color: var(--ess-sand);
+	}
+
 	.large {
 		grid-column: span 2;
 		grid-row: span 2;
@@ -188,6 +251,13 @@ const messages = [
 		background:
 			radial-gradient(circle at 76% 18%, rgba(var(--ess-sand-rgb), 0.96), transparent 10rem),
 			linear-gradient(135deg, rgba(var(--ess-sun-rgb), 0.94), rgba(var(--ess-sand-rgb), 0.82) 62%, rgba(var(--ess-lagoon-rgb), 0.72));
+	}
+
+	.large.image-card {
+		background:
+			linear-gradient(180deg, rgba(var(--ess-plum-rgb), 0.02) 0%, rgba(var(--ess-plum-rgb), 0.18) 38%, rgba(var(--ess-plum-rgb), 0.88) 100%),
+			linear-gradient(135deg, rgba(var(--ess-sun-rgb), 0.18), rgba(var(--ess-lagoon-rgb), 0.04)),
+			var(--card-bg-image) center 42% / cover no-repeat;
 	}
 
 	.large h3 {
